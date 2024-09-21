@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Samojlov_AV_Homework_Module_13_number_8</string>
+
+    <string name="toolbar_title">Мой гардероб</string>
+    <string name="toolbar_subtitle">Mod. 13 № 8</string>
+    <string name="exit">Exit</string>
+    <string name="toast_exit">Приложение закрыто</string>
+    <string name="titleTextVieWMainVTV_Text">Мой гардероб</string>
+    <string name="buttonMainBT_Text">К гардеробу</string>
+    <string name="nameItemTV_Hint">Наименование</string>
+    <string name="descriptionItemTV_Hint">Описание</string>
+</resources>

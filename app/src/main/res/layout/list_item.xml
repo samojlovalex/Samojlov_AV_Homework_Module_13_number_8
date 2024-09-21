@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start_end_list_item"
+        android:layout_marginTop="@dimen/margin_top_button_list_item"
+        android:layout_marginEnd="@dimen/margin_start_end_list_item"
+        android:layout_marginBottom="@dimen/margin_top_button_list_item"
+        app:cardCornerRadius="@dimen/cardCornerRadius"
+        app:cardElevation="@dimen/cardElevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Milk"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_text">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageSmallCircleIV"
+                android:layout_width="@dimen/imageView_radius_list_item"
+                android:layout_height="@dimen/imageView_radius_list_item"
+                android:layout_margin="@dimen/margin_image_list_item"
+                android:src="@drawable/wardrobe_empty_image"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_text">
+
+                <TextView
+                    android:id="@+id/nameItemTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nameItemTV_Hint"
+                    android:textColor="@color/Blue"
+                    android:textColorHint="@color/Grey"
+                    android:textSize="@dimen/textSizeTitle_item"
+                    android:textStyle="bold"></TextView>
+                <TextView
+                    android:id="@+id/descriptionItemTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/descriptionItemTV_Hint"
+                    android:textColorHint="@color/Grey"
+                    android:textSize="@dimen/textSize_item"
+                    ></TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
