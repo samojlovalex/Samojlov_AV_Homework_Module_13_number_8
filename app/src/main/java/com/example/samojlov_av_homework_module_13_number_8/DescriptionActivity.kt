@@ -7,9 +7,10 @@ import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -43,6 +44,12 @@ class DescriptionActivity : AppCompatActivity() {
     private var clothesId = 0
     private val GALLERY_REQUEST = 26
     private var photo: Bitmap? = null
+
+    private var dialogBuilder: AlertDialog.Builder? = null
+    private var inflater: LayoutInflater? = null
+    private var dialogValues: View? = null
+    private lateinit var editImage: ImageView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +91,11 @@ class DescriptionActivity : AppCompatActivity() {
 
 
         clothesInit()
+        dialogBuilder = AlertDialog.Builder(this)
+        inflater = this.layoutInflater
+        dialogValues = inflater!!.inflate(R.layout.update_image, null)
+        editImage = dialogValues!!.findViewById(R.id.updateImageIV)
+
     }
 
     override fun onResume() {
@@ -97,11 +109,11 @@ class DescriptionActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     private fun updateImage() {
         imageDescriptionIV.setOnLongClickListener {
-            val dialogBuilder = AlertDialog.Builder(this)
-            val inflater = this.layoutInflater
-            val dialogValues = inflater.inflate(R.layout.update_image, null)
-            dialogBuilder.setView(dialogValues)
-            val editImage = dialogValues.findViewById<ImageView>(R.id.updateImageIV)
+//            dialogBuilder = AlertDialog.Builder(this)
+//            inflater = this.layoutInflater
+//            dialogValues = inflater!!.inflate(R.layout.update_image, null)
+            dialogBuilder!!.setView(dialogValues)
+//            editImage = dialogValues!!.findViewById<ImageView>(R.id.updateImageIV)
 
             if (clothes != null) {
                 initImage(editImage)
@@ -111,10 +123,12 @@ class DescriptionActivity : AppCompatActivity() {
                 val photoPickerIntent = Intent(Intent.ACTION_PICK)
                 photoPickerIntent.type = "image/*"
                 startActivityForResult(photoPickerIntent, GALLERY_REQUEST)
+
             }
 
-            dialogBuilder.setTitle(getString(R.string.dialog_update_image_Title))
-            dialogBuilder.setPositiveButton(getString(R.string.dialog_update_name_positive_button)) { _, _ ->
+
+            dialogBuilder!!.setTitle(getString(R.string.dialog_update_image_Title))
+            dialogBuilder!!.setPositiveButton(getString(R.string.dialog_update_name_positive_button)) { _, _ ->
 
                 if (photo != null) {
                     val type = typeOf<Bitmap>().javaType
@@ -127,11 +141,11 @@ class DescriptionActivity : AppCompatActivity() {
                 }
                 initView()
             }
-            dialogBuilder.setNeutralButton(getString(R.string.basicValuesMenu_Toast)) { _, _ ->
+            dialogBuilder!!.setNeutralButton(getString(R.string.basicValuesMenu_Toast)) { _, _ ->
                 basicValue()
             }
-            dialogBuilder.setNegativeButton(getString(R.string.dialog_NegativeButton), null)
-            dialogBuilder.create().show()
+            dialogBuilder!!.setNegativeButton(getString(R.string.dialog_NegativeButton), null)
+            dialogBuilder!!.create().show()
             false
         }
     }
@@ -269,6 +283,7 @@ class DescriptionActivity : AppCompatActivity() {
                 val selectedImage: Uri? = data?.data
                 try {
                     photo = MediaStore.Images.Media.getBitmap(contentResolver, selectedImage)
+                    editImage.setImageBitmap(photo)
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
