@@ -2,11 +2,24 @@
     <string name="app_name">Samojlov_AV_Homework_Module_13_number_8</string>
 
     <string name="toolbar_title">Мой гардероб</string>
-    <string name="toolbar_subtitle">Mod. 13 № 8</string>
+    <string name="toolbar_subtitle">Mod. 13 № 9</string>
     <string name="exit">Exit</string>
     <string name="toast_exit">Приложение закрыто</string>
     <string name="titleTextVieWMainVTV_Text">Мой гардероб</string>
     <string name="buttonMainBT_Text">К гардеробу</string>
     <string name="nameItemTV_Hint">Наименование</string>
     <string name="descriptionItemTV_Hint">Описание</string>
+    <string name="description_Hint">Описание</string>
+    <string name="basicValuesMenu">Basic values</string>
+    <string name="basicValuesMenu_Toast">Basic values</string>
+    <string name="updateNameTV_Text">Имя</string>
+    <string name="updateDescriptionTV_Text">Описание</string>
+    <string name="updateDescriptionET_Hint">Описание</string>
+    <string name="updateImageTV_Text">Фото</string>
+    <string name="dialog_update_name_Title">Редактирование имени</string>
+    <string name="dialog_update_description_Title">Редактирование описания</string>
+    <string name="dialog_update_image_Title">изменение фото</string>
+    <string name="dialog_update_name_positive_button">Сохранить</string>
+    <string name="dialog_NegativeButton">Отмена</string>
+    <string name="backBT_Text">Назад</string>
 </resources>

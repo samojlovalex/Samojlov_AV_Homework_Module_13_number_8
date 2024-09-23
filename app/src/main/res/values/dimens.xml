@@ -21,4 +21,11 @@
     <dimen name="margin_start_end_list_item">8dp</dimen>
     <dimen name="imageView_radius_list_item">80dp</dimen>
     <dimen name="margin_image_list_item">6dp</dimen>
+    <!--DescriptionActivity-->
+    <dimen name="layout_width_Discription">300dp</dimen>
+    <dimen name="textSizeDescription">18sp</dimen>
+    <dimen name="textSizeButton">18sp</dimen>
+    <!--updateLayout-->
+    <dimen name="textSizeUpdate">18sp</dimen>
+    <dimen name="imageSizeUpdate">200dp</dimen>
 </resources>

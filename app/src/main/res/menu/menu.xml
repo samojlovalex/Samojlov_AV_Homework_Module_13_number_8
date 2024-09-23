@@ -5,6 +5,15 @@
     tools:context=".ProductDescriptionActivity">
 
     <item
+        android:id="@+id/basicValuesMenu"
+        android:checkable="false"
+        android:icon="@drawable/menu_icon"
+        android:orderInCategory="50"
+        android:title="@string/basicValuesMenu"
+        app:showAsAction="never">
+
+    </item>
+    <item
         android:id="@+id/exitMenu"
         android:checkable="false"
         android:icon="@drawable/menu_icon"

@@ -47,14 +47,6 @@
                     android:textColorHint="@color/Grey"
                     android:textSize="@dimen/textSizeTitle_item"
                     android:textStyle="bold"></TextView>
-                <TextView
-                    android:id="@+id/descriptionItemTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/descriptionItemTV_Hint"
-                    android:textColorHint="@color/Grey"
-                    android:textSize="@dimen/textSize_item"
-                    ></TextView>
             </LinearLayout>
 
         </LinearLayout>

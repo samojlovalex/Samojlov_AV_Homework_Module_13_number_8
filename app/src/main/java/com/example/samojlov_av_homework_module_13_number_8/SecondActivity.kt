@@ -1,12 +1,13 @@
 package com.example.samojlov_av_homework_module_13_number_8
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,6 +23,7 @@ class SecondActivity : AppCompatActivity() {
 
     private var listClothes = mutableListOf<Clothes>()
     private var wardrobe = Wardrobe()
+    private val db = DBHelper(this, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,19 +50,38 @@ class SecondActivity : AppCompatActivity() {
         recyclerViewRV = binding.recyclerViewRV
         recyclerViewRV.layoutManager = LinearLayoutManager(this)
 
-
         listClothesInit()
 
-        recyclerViewRV.adapter = CustomAdapter(listClothes)
+        initAdapter()
+    }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun initAdapter() {
+        val adapter = CustomAdapter(listClothes)
+        recyclerViewRV.adapter = adapter
+        recyclerViewRV.setHasFixedSize(true)
+        adapter.setOnClothesClickListener(object : CustomAdapter.OnClothesClickListener {
+            override fun onClothesClick(clothes: Clothes, position: Int) {
+                val intent = Intent(this@SecondActivity, DescriptionActivity::class.java)
+                intent.putExtra("clothes", clothes.id)
+                startActivity(intent)
+//                launchSecondActivityActivity.launch(intent)
+            }
+        })
+        adapter.notifyDataSetChanged()
     }
 
     private fun listClothesInit() {
 
-        for (i in wardrobe.mapDescription) {
-            val clothes = Clothes(i.key, i.value, wardrobe.mapImage[i.key])
-            listClothes.add(clothes)
-        }
+        if (db.readClothes().isEmpty()) {
+            var id = 0
+            for (i in wardrobe.mapDescription) {
+                val clothes = Clothes(id, i.key, i.value, wardrobe.mapImage[i.key].toString())
+                db.addProduct(clothes)
+                ++id
+            }
+            listClothes = db.readClothes()
+        } else listClothes = db.readClothes()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,13 +95,37 @@ class SecondActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.exitMenu -> {
                 Toast.makeText(
-                    applicationContext,
-                    getString(R.string.toast_exit),
-                    Toast.LENGTH_LONG
+                    applicationContext, getString(R.string.toast_exit), Toast.LENGTH_LONG
                 ).show()
                 finishAffinity()
+            }
+
+            R.id.basicValuesMenu -> {
+                Toast.makeText(
+                    applicationContext, getString(R.string.basicValuesMenu_Toast), Toast.LENGTH_LONG
+                ).show()
+                db.removeAll()
+                var id = 0
+                for (i in wardrobe.mapDescription) {
+                    val clothes = Clothes(id, i.key, i.value, wardrobe.mapImage[i.key].toString())
+                    db.addProduct(clothes)
+                    ++id
+                }
+                listClothes = db.readClothes()
+                initAdapter()
             }
         }
         return super.onOptionsItemSelected(item)
     }
+//    private val launchSecondActivityActivity =
+//        registerForActivityResult(
+//            ActivityResultContracts.StartActivityForResult()
+//        ) { result ->
+//            if (result.resultCode == RESULT_OK) {
+//                result.data
+//                initAdapter()
+//            } else {
+//                Toast.makeText(this, "Canceled", Toast.LENGTH_LONG)
+//            }
+//        }
 }
